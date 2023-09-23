@@ -9,9 +9,6 @@ on:
       settings_repository:
         type: string
         default: "Hiroshiba/test_workflow_call"
-    secrets:
-      GITHUB_TOKEN:
-        required: true
 
 defaults:
   run:
@@ -23,5 +20,3 @@ jobs:
     with:
       settings_repository: ${{ github.repository }}
       env_vars: ${{ inputs.super_linter_env_vars }}
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
