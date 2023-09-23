@@ -3,9 +3,15 @@ name: Reusable provider
 on:
   workflow_call:
     inputs:
+      super_linter_env_vars:
+        type: string
+        description: "複数行のenv_name=env_value"
       settings_repository:
         type: string
         default: "Hiroshiba/test_workflow_call"
+    secrets:
+      GITHUB_TOKEN:
+        required: true
 
 defaults:
   run:
@@ -16,3 +22,6 @@ jobs:
     uses: Hiroshiba/test_workflow_call/.github/workflows/super-linter.yml@main
     with:
       settings_repository: ${{ github.repository }}
+      env_vars: ${{ inputs.super_linter_env_vars }}
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

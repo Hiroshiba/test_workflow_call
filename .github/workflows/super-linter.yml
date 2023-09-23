@@ -5,9 +5,15 @@ name: Super Linter
 on:
   workflow_call:
     inputs:
+      env_vars:
+        type: string
+        description: "env_name=env_value,..."
       settings_repository:
         type: string
         default: "Hiroshiba/test_workflow_call"
+    secrets:
+      GITHUB_TOKEN:
+        required: true
 
 jobs:
   super-linter:
@@ -31,15 +37,12 @@ jobs:
           repository: ${{ inputs.settings_repository }}
           path: .voicevox-shared
 
+      - name: Setup Environment Variables
+        if: ${{ inputs.env_vars }}
+        run: for line in "${{ inputs.env_vars }}"; do echo "$line" >> $GITHUB_ENV; done
+
       - name: Lint Code Base
         uses: super-linter/super-linter@v5
         env:
           VALIDATE_ALL_CODEBASE: true
-          VALIDATE_PYTHON: false
-          VALIDATE_PYTHON_BLACK: false
-          VALIDATE_PYTHON_FLAKE8: false
-          VALIDATE_PYTHON_ISORT: false
-          VALIDATE_PYTHON_MYPY: false
-          VALIDATE_PYTHON_PYLINT: false
-          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
