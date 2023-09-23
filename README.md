@@ -1,0 +1,2 @@
+# test_workflow_call
+Github Actionsのworkflow_callをサクッと試す場所
