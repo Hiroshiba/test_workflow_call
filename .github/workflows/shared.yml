@@ -1,0 +1,23 @@
+name: Reusable provider
+
+on:
+  workflow_call:
+    inputs:
+      path_to_clone:
+        type: string
+        default: .github/.shared-voicevox
+
+jobs:
+  example_job:
+    name: Run shared action and show passed value
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Hello
+      - uses: actions/checkout@v4
+        with:
+          repository: organization-reusable-provider/repo-provider
+          ref: main
+          path: ${{ inputs.path_to_clone }}
+      - run: |-
+          tree ${{ inputs.path_to_clone }}
+          cat ${{ inputs.path_to_clone }}/README.md
