@@ -38,11 +38,6 @@ jobs:
         if: ${{ inputs.env_vars }}
         run: for line in "${{ inputs.env_vars }}"; do echo "$line" >> $GITHUB_ENV; done
 
-      - name: Install ShellCheck
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y shellcheck
-
       - name: Lint Code Base
         uses: super-linter/super-linter/slim@v5
         env:
