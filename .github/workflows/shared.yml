@@ -7,6 +7,10 @@ on:
         type: string
         default: .github/.shared-voicevox
 
+defaults:
+  run:
+    shell: bash
+        
 jobs:
   example_job:
     name: Run shared action and show passed value
@@ -15,7 +19,7 @@ jobs:
       - run: echo Hello
       - uses: actions/checkout@v4
         with:
-          repository: organization-reusable-provider/repo-provider
+          repository: ${{ github.repository }}
           ref: main
           path: ${{ inputs.path_to_clone }}
       - run: |-
