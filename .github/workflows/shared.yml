@@ -3,9 +3,13 @@ name: Reusable provider
 on:
   workflow_call:
     inputs:
+      repository_to_clone:
+        type: string
+        default: "Hiroshiba/test_workflow_cal"
       path_to_clone:
         type: string
         default: .github/.shared-voicevox
+  
 
 defaults:
   run:
@@ -19,7 +23,7 @@ jobs:
       - run: echo Hello
       - uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository }}
+          repository: ${{ inputs.repository_to_clone }}
           ref: main
           path: ${{ inputs.path_to_clone }}
       - run: |-
