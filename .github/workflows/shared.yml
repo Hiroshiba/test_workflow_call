@@ -3,29 +3,16 @@ name: Reusable provider
 on:
   workflow_call:
     inputs:
-      repository_to_clone:
+      settings_repository:
         type: string
         default: "Hiroshiba/test_workflow_call"
-      path_to_clone:
-        type: string
-        default: .github/.shared-voicevox
-  
 
 defaults:
   run:
     shell: bash
-        
+
 jobs:
-  example_job:
-    name: Run shared action and show passed value
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo Hello
-      - uses: actions/checkout@v4
-        with:
-          repository: ${{ inputs.repository_to_clone }}
-          ref: main
-          path: ${{ inputs.path_to_clone }}
-      - run: |-
-          tree ${{ inputs.path_to_clone }}
-          cat ${{ inputs.path_to_clone }}/README.md
+  super-linter:
+    uses: Hiroshiba/test_workflow_call/.github/workflows/super-linter.yml@main
+    with:
+      settings_repository: ${{ github.repository }}
