@@ -38,7 +38,7 @@ jobs:
         if: ${{ inputs.env_vars }}
         run: for line in "${{ inputs.env_vars }}"; do echo "$line" >> $GITHUB_ENV; done
 
-      - name: Update ShellCheck
+      - name: Install ShellCheck
         run: |
           sudo apt-get update
           sudo apt-get install -y shellcheck
