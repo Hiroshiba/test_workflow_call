@@ -42,6 +42,6 @@ jobs:
         uses: super-linter/super-linter/slim@v5
         env:
           VALIDATE_ALL_CODEBASE: true
-          VALIDATE_JSCPD: false
-          VALIDATE_NATURAL_LANGUAGE: false
+          VALIDATE_JSCPD: false # コピペ検出。厳しすぎるので無効化。
+          VALIDATE_NATURAL_LANGUAGE: false # 自然言語検出。英語のみなので無効化。
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
